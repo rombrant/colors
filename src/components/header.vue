@@ -15,22 +15,26 @@
             li.header__list__item
                 nav.header__list__item__nav
                     ul.header__list__item__nav__list
-                        li.tabs__item(v-for="tab in tabs")
+                        li.header__list__item__nav__item(v-for="tab in tabs" @click="tab.title === 'Главная' ? updateHeader() : showSlider=false")
                             router-link(
                                 :data-text="tab.title" 
                                 :to="tab.href"
                                 exact-active-class="active"
-                            ).tabs__link
+                            ).tabs__link {{tab.title}}
                 .searching
                     label.searching-label
                         input(placeholder="Что вы хотите найти?").searching-input
+            .slider(v-if="showSlider")
+                ul.slider__list
+                    li.slider__item slider
 </template>
 <script>
 export default {
   data() {
     return {
+        showSlider: true,
       tabs: [
-        { title: "Главная", href: "/" },
+        { title: "Главная", href: "/", mode:true},
         { title: "товары", href: "/products" },
         { title: "о нас", href: "/about" },
         { title: "доставка и оплата", href: "/transport" },
@@ -39,6 +43,12 @@ export default {
         { title: "корзина", href: "/cart" }
       ]
     };
+  },
+  methods: {
+      updateHeader() {
+          this.showSlider = true;
+          console.log("this.showSlider");
+      }
   }
 };
 </script>
@@ -125,6 +135,7 @@ export default {
                     padding-right: 1rem;
                     border-right: 1px solid rgba(48, 48, 48, .4);
                     margin-right: 1rem;
+                    text-decoration-line: none;
                     &:last-child {
                         border: none;
                         margin-right: 0;
@@ -134,6 +145,9 @@ export default {
             }
         }
     }
+}
+.tabs__link {
+    text-decoration-line: none;
 }
 .searching {
     &-label {

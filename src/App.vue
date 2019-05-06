@@ -4,8 +4,6 @@ div.root-wrapper-container
     template
       header.header-container
         app-header
-      section.tabs-container
-        tabs
       main.content-container
         router-view
 </template>
