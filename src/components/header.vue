@@ -7,7 +7,13 @@
                     a(href="+78009636160").li.header__list__item-callback Перезвоните мне!
                 ul.header__list__icons
                     li.header__list__item__icons-pic
-                    li.header__list__item__icons-pic
+                    li.header__list__item__icons-pic 
+                            router-link(
+                                data-text="Сравнение"
+                                to="/compare"
+                                exact-active-class="active"
+                                "showSlider"="false"
+                            ).tabs__link compare
                     li.header__list__item__icons-pic
                     li.header__list__item__icons__desc
                         span.header__list__item__icons__desc-count 0 товара

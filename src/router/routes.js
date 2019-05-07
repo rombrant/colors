@@ -47,5 +47,12 @@ export default [
         meta: {
           title: "About"
         }
+      },
+      {
+        path: "/compare",
+        component: () => import("components/pages/compare.vue"),
+        meta: {
+          title: "Compare"
+        }
       }
   ];
