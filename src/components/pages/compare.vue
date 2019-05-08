@@ -1,11 +1,12 @@
 <template lang="pug">
-    h1 compare
-        ul.lis-products
-            li.products-item(v-for="product in curProducts" :key="product.title")
+    h1.comp-headline Сравнение товаров
+      p.comp-desc Помощь при покупке. Пообщайтесь со специалистом в чате или позвоните по телефону 7‑800‑963‑61‑00
+        ul.list-products
+            li(v-for="product in newCurProducts" :key="product.title").card-item-compare
                 card-root(
                     :title="product.title"
                     :price="product.price"
-                    :img="product.imgsrc"
+                    :img="product.pic"
                     :code="product.code"
                     :desc="product.text"
                 )
@@ -24,6 +25,40 @@ export default {
      components: {
     cardRoot : () => import("components/card"),
     compareRoot : () => import("components/pages/compare"),
+  }, 
+  methods : {
+    formatCurProducts(data) {
+      if (data.length > 2) {
+        const length = data.length -2;
+        data.splice(0,length);
+        return data;
+      } else {
+        console.log(data.length);
+        return data;
+      }
+    }
   },
+  created() {
+    const data = this.curProducts;
+    this.newCurProducts = this.formatCurProducts(data);
+    console.log(this.newCurProducts.length);
+  }
 }
 </script>
+<style lang="postcss">
+.comp-headline {
+  text-align: center;
+  font-weight: 700;
+}
+.comp-desc {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+}
+.card-item-compare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 45%;
+}
+</style>

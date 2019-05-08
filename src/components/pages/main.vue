@@ -5,13 +5,14 @@
                 card-root(
                     :title="card.title"
                     :price="card.price"
-                    :img="card.imgsrc"
+                    :img="card.pic"
                     :code="card.code"
-                    @change="compareProducts"
+                    @compare="compareProducts"
+                    @buy="buyProducts"
                 )
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
     props: {
       card: Object
@@ -26,20 +27,25 @@ export default {
     compareRoot : () => import("components/pages/compare"),
   },
   methods: {
-      ...mapMutations("curProducts", ["ADD_CURPRODUCT"]),
+      ...mapActions("curProducts", ["addProductCompare"]),
+      ...mapActions("cart", ["addProductCart"]),
       makeArrWithRequiredImages(data) {
       return data.map(card => {
         const requiredPic = `http://kraskisnab.ru.com/${card.imgsrc}`;
-        card.imgsrc = requiredPic;
+        card.pic = requiredPic;
 
         return card;
       });
    },
    compareProducts(title) {
            const curProduct = this.cards.filter(item=> item.title === title);
-            console.log(curProduct);
-            this.ADD_CURPRODUCT(curProduct[0]);
-        }
+           console.log(curProduct);
+            this.addProductCompare(curProduct[0]);
+        },
+    buyProducts(title) {
+        const cartProduct = this.cards.filter(item=> item.title === title);
+        this.addProductCart(cartProduct[0]);
+    }
   },
 created() {
     const data = require("../../data/data.json");
@@ -47,11 +53,12 @@ created() {
     }
 }
 </script>
-<style lang="postcss" scoped>
+<style lang="postcss">
 .list-products {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
 }
 .card-item {

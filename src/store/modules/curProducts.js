@@ -10,8 +10,8 @@ export default {
       ADD_CURPRODUCT: (state, newProduct) => {
         state.curProducts.push(newProduct);
       },
-      REMOVE_SKILL: (state, deletedSkillId) => {
-        state.skills = state.skills.filter(skill => skill.id !== deletedSkillId);
+      REMOVE_CURPRODUCT: (state) => {
+        state.curProducts = state.curProducts.pop();
       },
       EDIT_SKILL: (state, editedSkill) => {
         state.skills = state.skills.map(skill =>
@@ -20,6 +20,8 @@ export default {
       }
     },
     actions: {
-      
+          addProductCompare({ commit }, newProductCompare) {
+              commit("ADD_CURPRODUCT", newProductCompare);
+          }
       }
   };

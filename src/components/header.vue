@@ -6,18 +6,27 @@
                     a(href="+78009636160").header__list__item-tel 7(800) 963 61 00
                     a(href="+78009636160").li.header__list__item-callback Перезвоните мне!
                 ul.header__list__icons
-                    li.header__list__item__icons-pic
+                    li.header__list__item__icons-pic Избранное
                     li.header__list__item__icons-pic 
                             router-link(
                                 data-text="Сравнение"
                                 to="/compare"
                                 exact-active-class="active"
                                 "showSlider"="false"
-                            ).tabs__link compare
+                            ).tabs__link Сравнение
                     li.header__list__item__icons-pic
+                            router-link(
+                                data-text="Корзина"
+                                to="/cart"
+                                exact-active-class="active"
+                                "showSlider"="false"
+                            ).tabs__link Корзина
                     li.header__list__item__icons__desc
                         span.header__list__item__icons__desc-count 0 товара
-                        span.header__list__item__icons__desc-count 0 рублей
+                        span.header__list__item__icons__desc-count 
+                            value-root(
+                                :value="value"
+                            )
             li.header__list__item
                 nav.header__list__item__nav
                     ul.header__list__item__nav__list
@@ -35,20 +44,28 @@
                     li.slider__item slider
 </template>
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
         showSlider: true,
       tabs: [
         { title: "Главная", href: "/", mode:true},
-        { title: "товары", href: "/products" },
-        { title: "о нас", href: "/about" },
-        { title: "доставка и оплата", href: "/transport" },
-        { title: "портфолио", href: "/portfolio" },
-        { title: "контакты", href: "/contacts" },
-        { title: "корзина", href: "/cart" }
+        { title: "Продукция", href: "/products" },
+        { title: "О компании", href: "/about" },
+        { title: "Доставка и оплата", href: "/transport" },
+        { title: "Портфолио", href: "/portfolio" },
+        { title: "Контакты", href: "/contacts" }
       ]
     };
+  },
+  components: {
+      valueRoot : () => import("components/value")
+  },
+  computed: {
+      ...mapState("cart", {
+      value: state => state.value
+    })
   },
   methods: {
       updateHeader() {
@@ -59,6 +76,26 @@ export default {
 };
 </script>
 <style lang="postcss" scoped>
+.header__list__icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header__list__item__icons-pic {
+border-radius: 3rem;
+border: 2px solid rgb(255, 255, 255);
+color: #fff;
+padding: .5rem 1rem;
+cursor: pointer;
+    &:hover {
+        background: #fff;
+    }
+}
+.tabs__link {
+    &:hover {
+        color: #5CD444;
+    }
+}
 .header {
     &__list {
         padding-top: 3rem;

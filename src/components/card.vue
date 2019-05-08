@@ -1,6 +1,6 @@
 <template lang="pug">
     .card
-        .card__info
+        .card__info(v-if="disabled")
             span.card-status есть в наличии
             span.card-code Код {{code}}
         .card__img
@@ -12,11 +12,11 @@
                         for star in stars
                             li(data-id=`${star}`).card-raiting-item
             .card-price {{price}}
-        .card-desc {{desc}}
+        .card-text {{desc}}
         .card__panel
-            button(@click="$emit('change', title)").card-compare сранвить
+            button(@click="$emit('compare', title)").card-compare сранвить
             button.card-fav избранное
-            button.card-buy купить
+            button.card-buy(@click="$emit('buy', title)") купить
 </template>
 <script>
 import { reject } from 'q';
@@ -30,11 +30,21 @@ export default {
             id: '',
             desc:''
     },
+    data()  {
+        return {
+            disabled:true
+        }
+    }
 }
 </script>
 <style lang="postcss">
 .card {
     margin: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    &-code {
+        font-size: 1rem;
+    }
 }
 .card__info {
     display: flex;
@@ -46,6 +56,7 @@ export default {
     color:rgb(9, 255, 0);
     position: relative;
     padding-left: 1rem; 
+    font-size: 1.2rem;
     &:before {
         position: absolute;
         top: 30%;
@@ -56,6 +67,33 @@ export default {
         height: .5rem;
         background: rgb(9, 255, 0);
         border-radius: 50%;
+    }
+}
+.card-text {
+    font-size: 1rem;
+    color: #000;
+}
+.card-item-compare {
+    
+}
+.cart-item-compare {
+    & .card {
+        align-items: center;
+    }
+    & .card__info {
+        display: none;
+    }
+    & .card__panel {
+        display: none;
+    }
+    & .card__desc {
+        display: flex;
+        flex-direction: row;
+        width: 30%;
+        justify-content: space-between;
+    }
+    & .card__img {
+        width: 10%;
     }
 }
 </style>
