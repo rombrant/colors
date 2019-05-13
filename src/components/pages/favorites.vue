@@ -46,9 +46,11 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  max-width: 100%;
+  flex: 1;
   & .card {
       flex-direction: row;
+      align-items: center;
+      flex:1;
   }
   & .card__img {
       min-width: 50%;;

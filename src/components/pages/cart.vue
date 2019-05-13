@@ -34,7 +34,7 @@ export default {
   }
 }
 </script>
-<style lang="postcss" scoped>
+<style lang="postcss" >
 .list-cart {
     display: flex;
     flex-direction: column;
@@ -52,12 +52,18 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
+    
 }
-.card-item-compare {
+.cart-item-compare {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
+  & .card__desc {
+    align-items: center;
+    width: 60%;
+  }
+  
 }
 
 </style>

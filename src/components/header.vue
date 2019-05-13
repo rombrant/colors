@@ -6,34 +6,36 @@
                     a(href="+78009636160").header__list__item-tel 7(800) 963 61 00
                     a(href="+78009636160").li.header__list__item-callback Перезвоните мне!
                 ul.header__list__icons
-                    li.header__list__item__icons-pic
+                    li.header__list__item__icons-pic(@click="showSlider=false")
                             router-link(
                                 data-text="Избранное"
                                 to="/favorites"
                                 exact-active-class="active"
                                 showSlider="false"
                             ).tabs__link-pic 
-                    li.header__list__item__icons-pic 
+                    li.header__list__item__icons-pic(@click="showSlider=false")
                             router-link(
                                 data-text="Сравнение"
                                 to="/compare"
                                 exact-active-class="active"
                                 "showSlider"="false"
                             ).tabs__link-pic 
-                    li.header__list__item__icons-pic
+                    li.header__list__item__icons-pic(@click="showSlider=false")
                             router-link(
                                 data-text="Корзина"
                                 to="/cart"
                                 exact-active-class="active"
-                                "showSlider"="false"
+                                showSlider=false
                             ).tabs__link-pic
                             count-root(
+                                v-if="value.length"
                                 :value="value"
                             ).stylezed
                     li.header__list__item__icons__desc
                         span.header__list__item__icons__desc-count
                             count-root(
                                 :value="value"
+                                text="товаров"
                             ) 
                         span.header__list__item__icons__desc-count 
                             value-root(
@@ -111,8 +113,8 @@ margin-right: 1.8rem;
 }
 .header {
     &__list {
-        padding-top: 3rem;
-        padding-bottom: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         &__icons {
             padding-right: 3rem; 
             flex: 1;
@@ -156,6 +158,7 @@ margin-right: 1.8rem;
                     background-position: center center;
                     background-repeat: no-repeat;
                     background-size: cover;
+                    transition: .6s;
                 }
                 &:after {
                     display: block;
@@ -166,6 +169,18 @@ margin-right: 1.8rem;
                     border: 2px solid #fff;
                     border-radius: 50%;
                     top: 0;
+                    transition: .6s;
+                }
+                &:hover {
+                    &.header__list__item-tel:after {
+                        background: #fff;
+                    }
+                    &.header__list__item-tel:before {
+                        background: svg-load('phone-call.svg', fill=#1CAB6E, width=100%, height=100%);
+                        transform: rotate(35deg);
+                        transition: .6s;
+                        z-index: 10000;
+                    }
                 }
             }
             &-callback {
@@ -300,6 +315,33 @@ margin-right: 1.8rem;
     &-label {
         display: block;
         position: relative;
+        &::before {
+            display: block;
+            position: absolute;
+            top: .6rem;
+            right: -.1rem;
+            content:'';
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+            background: svg-load('searcher.svg', fill=#fff, width=100%, height=100%);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: 10000;
+            
+        }
+        &::after {
+            display: block;
+            position: absolute;
+            top: -.05rem;
+            right: -.7rem;
+            content:'';
+            width: 2.3rem;
+            height: 2.3rem;
+            border-radius: 50%;
+            background: #7D74F3
+        }
     }
     &-input {
         padding: .5rem 1rem;

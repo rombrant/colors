@@ -1,11 +1,12 @@
 <template lang="pug">
     .info
-        span.value  {{currentCount}} 
+        span.value {{text}}  {{currentCount}} 
 </template>
 <script>
 import {  mapState, mapActions, mapMutations  } from "vuex"
 export default {
     props: {
+        text:'',
         value: ''
     },
     data() {

@@ -44,8 +44,11 @@ export default {
 }
 .card {
     margin: 1rem 1rem;
+    padding: .5rem .5rem;
     display: flex;
     flex-direction: column;
+    background: #fff;
+    justify-content: space-between;
     &-code {
         font-size: 1rem;
     }
@@ -77,9 +80,27 @@ export default {
     font-size: 1rem;
     color: #000;
 }
-.card-item-compare {
-    
+.card__desc {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
+.card-raiting {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    &-item {
+    margin-right: .3rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    background: svg-load('star-pic.svg', fill=rgb(255, 0, 0), width=100%, height=100%);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+}
+    
 .card-button {
     position: relative;
     display: block;
@@ -88,6 +109,7 @@ export default {
     border: 2px solid rgb(122, 122, 122);
     border-radius: 50%;
     background: #fff;
+    margin-right: 1rem;
 }
 .card-compare {
     &:before {
@@ -136,9 +158,12 @@ export default {
     }
 }
 .card-buy {
-    padding-left: 3rem;
-    width: 10rem;
+    padding-left: 2.5rem;
+    width: 45%;
     border-radius: 3rem;
+    border: 2px solid#7D74F3;
+    color: #7D74F3;
+    margin-right: 0;
     &:before {
         display: block;
         content: '';
@@ -148,7 +173,7 @@ export default {
         width: 1.5rem;
         height: 1.5rem;
         cursor: pointer;
-        background: svg-load('shopping-cart.svg', fill=rgb(122, 122, 122), width=100%, height=100%);
+        background: svg-load('shopping-cart.svg', fill=rgb(125, 116, 243), width=100%, height=100%);
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
