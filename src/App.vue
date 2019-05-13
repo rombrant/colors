@@ -23,4 +23,14 @@ export default {
   }
 };
 </script>
+<style lang="postcss">
+.header-container {
+  position: fixed;
+  top: 0;
+}
+.content-container {
+  padding-top: 15rem; 
+}
+</style>
+
 

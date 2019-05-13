@@ -8,6 +8,7 @@
                     :img="card.pic"
                     :code="card.code"
                     @compare="compareProducts"
+                    @favor="favorProducts"
                     @buy="buyProducts"
                 )
 </template>
@@ -28,7 +29,7 @@ export default {
   },
   methods: {
       ...mapActions("curProducts", ["addProductCompare"]),
-      ...mapActions("cart", ["addProductCart"]),
+      ...mapActions("cart", ["addProductCart","addProductFavor"]),
       makeArrWithRequiredImages(data) {
       return data.map(card => {
         const requiredPic = `http://kraskisnab.ru.com/${card.imgsrc}`;
@@ -45,6 +46,10 @@ export default {
     buyProducts(title) {
         const cartProduct = this.cards.filter(item=> item.title === title);
         this.addProductCart(cartProduct[0]);
+    },
+    favorProducts(title) {
+        const favorProduct = this.cards.filter(item=> item.title === title);
+        this.addProductFavor(favorProduct[0]);
     }
   },
 created() {

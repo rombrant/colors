@@ -6,23 +6,35 @@
                     a(href="+78009636160").header__list__item-tel 7(800) 963 61 00
                     a(href="+78009636160").li.header__list__item-callback Перезвоните мне!
                 ul.header__list__icons
-                    li.header__list__item__icons-pic Избранное
+                    li.header__list__item__icons-pic
+                            router-link(
+                                data-text="Избранное"
+                                to="/favorites"
+                                exact-active-class="active"
+                                showSlider="false"
+                            ).tabs__link-pic 
                     li.header__list__item__icons-pic 
                             router-link(
                                 data-text="Сравнение"
                                 to="/compare"
                                 exact-active-class="active"
                                 "showSlider"="false"
-                            ).tabs__link Сравнение
+                            ).tabs__link-pic 
                     li.header__list__item__icons-pic
                             router-link(
                                 data-text="Корзина"
                                 to="/cart"
                                 exact-active-class="active"
                                 "showSlider"="false"
-                            ).tabs__link Корзина
+                            ).tabs__link-pic
+                            count-root(
+                                :value="value"
+                            ).stylezed
                     li.header__list__item__icons__desc
-                        span.header__list__item__icons__desc-count 0 товара
+                        span.header__list__item__icons__desc-count
+                            count-root(
+                                :value="value"
+                            ) 
                         span.header__list__item__icons__desc-count 
                             value-root(
                                 :value="value"
@@ -50,7 +62,7 @@ export default {
     return {
         showSlider: true,
       tabs: [
-        { title: "Главная", href: "/", mode:true},
+        { title: "Главная", href: "/"},
         { title: "Продукция", href: "/products" },
         { title: "О компании", href: "/about" },
         { title: "Доставка и оплата", href: "/transport" },
@@ -60,7 +72,8 @@ export default {
     };
   },
   components: {
-      valueRoot : () => import("components/value")
+      valueRoot : () => import("components/value"),
+      countRoot : () => import("components/counter"),
   },
   computed: {
       ...mapState("cart", {
@@ -85,8 +98,8 @@ export default {
 border-radius: 3rem;
 border: 2px solid rgb(255, 255, 255);
 color: #fff;
-padding: .5rem 1rem;
 cursor: pointer;
+margin-right: 1.8rem;
     &:hover {
         background: #fff;
     }
@@ -164,9 +177,82 @@ cursor: pointer;
                 text-decoration-line: none;
             }
             &__icons {
+                &-pic {
+                    position: relative;
+                    display: block;
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    border: 2px solid #fff;
+                    border-radius: 50%;
+                    &:nth-child(1) {
+                        &:before {
+                            display: block;
+                            content: '';
+                            top: .4rem;
+                            left: .4rem;
+                            position: absolute;
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            cursor: pointer;
+                            background: svg-load('heart.svg', fill=#fff, width=100%, height=100%);
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                        }
+                        &:hover {
+                            &.header__list__item__icons-pic::before {
+                                 background: svg-load('heart.svg', fill=#1CAB6E, width=100%, height=100%);
+                            }
+                        } 
+                    }
+                    
+                    &:nth-child(2) {
+                        &:before {
+                            display: block;
+                            content: '';
+                            top: .4rem;
+                            left: .4rem;
+                            position: absolute;
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            cursor: pointer;
+                            background: svg-load('comparison.svg', fill=#fff, width=100%, height=100%);
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                        } 
+                        &:hover {
+                            &.header__list__item__icons-pic::before {
+                                 background: svg-load('comparison.svg', fill=#1CAB6E, width=100%, height=100%);
+                            }
+                        }
+                    }
+                    &:nth-child(3) {
+                        &:before {
+                            display: block;
+                            content: '';
+                            top: .4rem;
+                            left: .4rem;
+                            position: absolute;
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            cursor: pointer;
+                            background: svg-load('shopping-cart.svg', fill=#fff, width=100%, height=100%);
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                        }
+                        &:hover {
+                            &.header__list__item__icons-pic::before {
+                                 background: svg-load('shopping-cart.svg', fill=#1CAB6E, width=100%, height=100%);
+                            }
+                        }  
+                    }
+                }
                 &__desc {
                     display: flex;
                     flex-direction: column;
+                    width: 40%;
                 }
             }
             &__nav {
@@ -189,8 +275,26 @@ cursor: pointer;
         }
     }
 }
+.tabs__link-pic {
+    display: block;
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    text-decoration-line: none;
+    min-width: 3rem;
+    min-height: 3rem;
+}
 .tabs__link {
     text-decoration-line: none;
+}
+.stylezed {
+    position: absolute;
+    top: -.5rem;
+    right: -.5rem;
+    width: 1.2rem;
+    text-align: center;
+    background: #7D74F3;
+    border-radius: 50%;
 }
 .searching {
     &-label {

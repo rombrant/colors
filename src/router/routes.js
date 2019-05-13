@@ -54,5 +54,12 @@ export default [
         meta: {
           title: "Compare"
         }
+      },
+      {
+        path: "/favorites",
+        component: () => import("components/pages/favorites.vue"),
+        meta: {
+          title: "Favorites"
+        }
       }
   ];

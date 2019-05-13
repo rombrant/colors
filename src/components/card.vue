@@ -12,11 +12,11 @@
                         for star in stars
                             li(data-id=`${star}`).card-raiting-item
             .card-price {{price}}
-        .card-text {{desc}}
-        .card__panel
-            button(@click="$emit('compare', title)").card-compare сранвить
-            button.card-fav избранное
-            button.card-buy(@click="$emit('buy', title)") купить
+            .card-text {{desc}}
+            .card__panel
+                button(@click="$emit('compare', title)").card-compare.card-button
+                button(@click="$emit('favor', title)").card-fav.card-button 
+                button.card-buy(@click="$emit('buy', title)").card-buy.card-button Купить
 </template>
 <script>
 import { reject } from 'q';
@@ -38,6 +38,10 @@ export default {
 }
 </script>
 <style lang="postcss">
+.card__panel {
+    display: flex;
+    flex-direction: row;
+}
 .card {
     margin: 1rem 1rem;
     display: flex;
@@ -75,6 +79,87 @@ export default {
 }
 .card-item-compare {
     
+}
+.card-button {
+    position: relative;
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid rgb(122, 122, 122);
+    border-radius: 50%;
+    background: #fff;
+}
+.card-compare {
+    &:before {
+        display: block;
+        content: '';
+        top: .4rem;
+        left: .4rem;
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+        background: svg-load('comparison.svg', fill=rgb(122, 122, 122), width=100%, height=100%);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &:hover {
+        color:#1CAB6E;
+        border: 2px solid #1CAB6E;
+        &.card-compare::before {
+                background: svg-load('comparison.svg', fill=#1CAB6E, width=100%, height=100%);
+        }
+    }
+}
+.card-fav {
+    &:before {
+        display: block;
+        content: '';
+        top: .4rem;
+        left: .4rem;
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+        background: svg-load('heart.svg', fill=rgb(122, 122, 122), width=100%, height=100%);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &:hover {
+        border: 2px solid #1CAB6E;
+        color:#1CAB6E;
+        &.card-fav::before {
+                background: svg-load('heart.svg', fill=#1CAB6E, width=100%, height=100%);
+        }
+    }
+}
+.card-buy {
+    padding-left: 3rem;
+    width: 10rem;
+    border-radius: 3rem;
+    &:before {
+        display: block;
+        content: '';
+        top: .4rem;
+        left: .4rem;
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+        background: svg-load('shopping-cart.svg', fill=rgb(122, 122, 122), width=100%, height=100%);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &:hover {
+        color:#1CAB6E;
+        border: 2px solid #1CAB6E;
+        &.card-buy::before {
+                background: svg-load('shopping-cart.svg', fill=#1CAB6E, width=100%, height=100%);
+        }
+    }
 }
 .cart-item-compare {
     & .card {

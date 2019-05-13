@@ -1,6 +1,6 @@
 <template lang="pug">
     .info
-        span.value Итого {{currentValue}}0 рублей
+        span.value  {{currentCount}} 
 </template>
 <script>
 import {  mapState, mapActions, mapMutations  } from "vuex"
@@ -15,19 +15,15 @@ export default {
         }
     },
     computed: {
-         currentValue() {
-             return this.trueValueCounter(this.value)
+         currentCount() {
+             return this.trueCounter(this.value)
          }
     },
     methods: {
-        trueValueCounter(data) {
-            var realPrice = 0;
-            Array.from(data).forEach(element => {
-                realPrice += element;
-            });
-            return realPrice;
+        trueCounter(data) {
+            var count = data.length;
+            return count;
         }
     }
 }
 </script>
-

@@ -4,11 +4,15 @@ export default {
     namespaced: true,
     state: {
       cartProducts: [],
-      value: []
+      value: [],
+      favorProducts: []
     },
     mutations: {
-      ADD_CARTPRODUCT: (state, newProduct) => {
-        state.cartProducts.push(newProduct);
+      ADD_CARTPRODUCT: (state, newCartProduct) => {
+        state.cartProducts.push(newCartProduct);
+      },
+      ADD_FAVORPRODUCT: (state, newFavorProduct) => {
+        state.favorProducts.push(newFavorProduct);
       },
       REMOVE_CURPRODUCT: (state) => {
         state.curProducts = state.curProducts.pop();
@@ -22,6 +26,9 @@ export default {
               commit("ADD_CARTPRODUCT", newProductCart);
               const value = parseFloat(newProductCart.price);
               commit("INCREASE_VALUE", value);
-          }
+          },
+          addProductFavor({ commit }, newFavorProduct) {
+            commit("ADD_FAVORPRODUCT", newFavorProduct);
+        }
       }
   };
