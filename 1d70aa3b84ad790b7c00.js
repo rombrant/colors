@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{42:function(t,n,s){"use strict";s.r(n);var e=function(){var t=this.$createElement;return(this._self._c||t)("div",{staticClass:"h1"},[this._v("Transporting")])};e._withStripped=!0;var i=s(2),r=Object(i.a)({},e,[],!1,null,null,null);r.options.__file="src/components/pages/transport.vue";n.default=r.exports}}]);

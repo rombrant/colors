@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{38:function(t,s,e){"use strict";e.r(s);var n=function(){var t=this.$createElement;return(this._self._c||t)("div",{staticClass:"h1"},[this._v("Products")])};n._withStripped=!0;var i=e(2),c=Object(i.a)({},n,[],!1,null,null,null);c.options.__file="src/components/pages/products.vue";s.default=c.exports}}]);
