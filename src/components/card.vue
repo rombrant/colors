@@ -159,7 +159,7 @@ export default {
 }
 .card-buy {
     padding-left: 2.5rem;
-    width: 45%;
+    width: 8rem;
     border-radius: 3rem;
     border: 2px solid#7D74F3;
     color: #7D74F3;
