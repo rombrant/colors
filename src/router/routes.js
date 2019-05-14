@@ -22,7 +22,7 @@ export default [
     },
     {
       path: "/contacts",
-      component: () => import("components/pages/product.vue"),
+      component: () => import("components/pages/contacts.vue"),
       meta: {
         title: "contacts"
       }
@@ -39,6 +39,13 @@ export default [
         component: () => import("components/pages/portfolio.vue"),
         meta: {
           title: "Portfolio"
+        }
+    },
+    {
+        path: "/product",
+        component: () => import("components/pages/product.vue"),
+        meta: {
+          title: "Product"
         }
     },
     {

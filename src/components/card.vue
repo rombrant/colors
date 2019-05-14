@@ -1,6 +1,6 @@
 <template lang="pug">
     .card
-        .card__info(v-if="disabled")
+        .card__info
             span.card-status есть в наличии
             span.card-code Код {{code}}
         .card__img
@@ -17,6 +17,12 @@
                 button(@click="$emit('compare', title)").card-compare.card-button
                 button(@click="$emit('favor', title)").card-fav.card-button 
                 button.card-buy(@click="$emit('buy', title)").card-buy.card-button Купить
+                button(@click="$emit('detail', title)").card-detail.card-button Подробнее
+                    router-link(
+                                data-text="Product" 
+                                to="/product"
+                                exact-active-class="active"
+                            ).tabs__link
 </template>
 <script>
 import { reject } from 'q';
@@ -32,7 +38,7 @@ export default {
     },
     data()  {
         return {
-            disabled:true
+            showSlider: false
         }
     }
 }
@@ -41,6 +47,14 @@ export default {
 .card__panel {
     display: flex;
     flex-direction: row;
+}
+.item-slider-card {
+    min-width: 100%;
+    max-width: 100%;
+    & .card-item {
+        min-width: 100%;
+        max-width: 100%;
+    }
 }
 .card {
     margin: 1rem 1rem;

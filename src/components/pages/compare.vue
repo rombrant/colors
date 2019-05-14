@@ -60,5 +60,8 @@ export default {
   flex-direction: column;
   align-items: center;
   max-width: 45%;
+  & .card-detail {
+    display: none;
+  }
 }
 </style>

@@ -28,13 +28,13 @@ export default {
     compareRoot : () => import("components/pages/compare"),
   },
   methods: {
-      ...mapActions("curProducts", ["addProductCompare"]),
+      ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
       ...mapActions("cart", ["addProductCart","addProductFavor"]),
       makeArrWithRequiredImages(data) {
       return data.map(card => {
         const requiredPic = `http://kraskisnab.ru.com/${card.imgsrc}`;
         card.pic = requiredPic;
-
+        this.addNewCard(card);
         return card;
       });
    },
@@ -69,6 +69,9 @@ created() {
 .card-item {
     min-width: 25%;
     max-width: 25%;
+    & .card-detail {
+        display: none;
+    }
 }
 </style>
 

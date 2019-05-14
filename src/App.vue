@@ -26,12 +26,9 @@ export default {
 };
 </script>
 <style lang="postcss">
-.header-container {
-  position: fixed;
-  top: 0;
-}
+
 .content-container {
-  padding-top: 13rem; 
+
   max-width: 1490px;
   margin: 0 auto;
   min-height: 90vh;

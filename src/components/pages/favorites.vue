@@ -55,6 +55,9 @@ export default {
   & .card__img {
       min-width: 50%;;
   }
+  & .card-detail {
+    display: none;
+  }
   & .card__info {
       display: none;
   }

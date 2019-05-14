@@ -53,9 +53,8 @@
                 .searching
                     label.searching-label
                         input(placeholder="Что вы хотите найти?").searching-input
-            .slider(v-if="showSlider")
-                ul.slider__list
-                    li.slider__item slider
+            .container.slider(v-if="showSlider" @click="showSlider=false")
+                slider-app
 </template>
 <script>
 import { mapState } from 'vuex';
@@ -76,6 +75,7 @@ export default {
   components: {
       valueRoot : () => import("components/value"),
       countRoot : () => import("components/counter"),
+      sliderApp : () => import("components/slider"),
   },
   computed: {
       ...mapState("cart", {

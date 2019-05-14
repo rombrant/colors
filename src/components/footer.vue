@@ -48,13 +48,19 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 1rem 0;
-        border-bottom: 1px solid #fff;
     }
     &__item {
         color: #fff;
         display: flex;
         flex-direction: column;
+        &span {
+            color: #fff;
+        }
         
+    }
+    &-copyright {
+        color: #fff;
+        padding: 1rem 0;
     }
 }
 </style>
