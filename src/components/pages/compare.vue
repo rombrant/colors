@@ -21,6 +21,9 @@ export default {
         ...mapState("curProducts", {
       curProducts: state => state.curProducts
     }),
+     newCurProducts() {
+       return this.formatCurProducts(this.curProducts);
+     }
    },
      components: {
     cardRoot : () => import("components/card"),
@@ -37,11 +40,6 @@ export default {
         return data;
       }
     }
-  },
-  created() {
-    const data = this.curProducts;
-    this.newCurProducts = this.formatCurProducts(data);
-    console.log(this.newCurProducts.length);
   }
 }
 </script>
@@ -58,8 +56,19 @@ export default {
 .card-item-compare {
   display: flex;
   flex-direction: column;
+  
   align-items: center;
   max-width: 45%;
+  & .card {
+    min-height: 98%;
+    justify-content: flex-start;
+  }
+  & .card-buy {
+        font-size: 1rem;
+    }
+  & .card-compare {
+    display: none;
+  }
   & .card-detail {
     display: none;
   }

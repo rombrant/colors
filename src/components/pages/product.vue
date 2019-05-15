@@ -1,5 +1,5 @@
 <template lang="pug">
-    .h1 Product
+    h2 Страница Продукта:  {{detailProduct.title}}
         .product-card-item
             card-root(
                 :title="detailProduct.title"
@@ -27,6 +27,15 @@ export default {
 .product-card-item {
     & .card-detail {
         display: none;
+    }
+    & .card {
+        flex-direction: row;
+    }
+    & .card-buy {
+        font-size: 1rem;
+    }
+    & .card__img {
+        min-width: 45%;
     }
 }
 </style>

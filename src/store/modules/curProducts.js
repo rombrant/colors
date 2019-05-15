@@ -2,8 +2,10 @@ export default {
     namespaced: true,
     state: {
       curProducts: [],
-      cards:[],
-      detailProduct:[]
+      cards: [],
+      detailProduct: [],
+      searcher: [],
+      matching: []
     },
     mutations: {
       ADD_CARD: (state, card) => {
@@ -15,10 +17,11 @@ export default {
       ADD_DETAILCARD: (state, newDeatailCard) => {
         state.detailProduct = newDeatailCard;
       },
-      EDIT_SKILL: (state, editedSkill) => {
-        state.skills = state.skills.map(skill =>
-          skill.id === editedSkill.id ? editedSkill : skill
-        );
+      ADD_TO_SEARCHER: (state, newSymbol) => {
+        state.searcher.push(newSymbol);
+      },
+      ADD_TO_MATCHING: (state, newMatch) => {
+        state.matching = newMatch;
       }
     },
     actions: {

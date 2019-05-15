@@ -24,7 +24,6 @@ export default {
     data() {
         
     return {
-        showSlider:true,
       flickityOptions: {
       autoPlay: 2000,
       initialIndex: 3,
@@ -49,11 +48,6 @@ export default {
           
           const detailProduct = this.cards.filter(item=> item.title === title);
             this.addNewDetail(detailProduct[0]);
-            return this.showSlider = false;
-      },
-      showSliderCounter(showSlider) {
-          console.log(this.showSlider);
-          return this.showSlider;
       }
   }
 }
@@ -96,7 +90,6 @@ export default {
     
     & .card-detail {
         position: relative;
-        margin-top: 1rem; 
         display: block;
         width: 8rem;
         border-radius: 3rem;
@@ -118,6 +111,7 @@ export default {
         font-size: .8rem;
         max-height: 8rem;
         overflow: hidden;
+        color: #fff;
     }
 }
 </style>

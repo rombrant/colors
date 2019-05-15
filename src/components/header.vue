@@ -52,15 +52,42 @@
                             ).tabs__link {{tab.title}}
                 .searching
                     label.searching-label
-                        input(placeholder="Что вы хотите найти?").searching-input
+                        input-app(  v-model="searching",
+                                    placeholder="Что вы хотите найти?"
+                                    v-bind="$attrs"
+                                    @input="preventInput").searching-input
+                        .result-searching(v-if="showResult")
+                            card-root(
+                                :title= "matching.title",
+                                :price= "matching.price",
+                                :img= "matching.pic",
+                                :code= "matching.code",
+                                :desc= "matching.desc",
+                                @compare="compareProducts",
+                                @favor="favorProducts",
+                                @buy="buyProducts"
+                            )
             .container.slider(v-if="showSlider" @click="showSlider=false")
                 slider-app
 </template>
 <script>
-import { mapState } from 'vuex';
+//const t = 'testtext dummy'
+//const serach = /test|dummy/gmi
+//a = []
+//for (let i = 0; i < test.length; i++) {
+  //  const e = test[i]
+    //const r = e.title.match(serach)
+     //   if(r.length > 0){
+       //     a.push(i)
+        //}    
+//}
+
+import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
   data() {
     return {
+        searching:'',
+        showResult:false,
         showSlider: true,
       tabs: [
         { title: "Главная", href: "/"},
@@ -73,24 +100,58 @@ export default {
     };
   },
   components: {
+      inputApp: () => import("components/input"),
       valueRoot : () => import("components/value"),
       countRoot : () => import("components/counter"),
       sliderApp : () => import("components/slider"),
+      cardRoot : () => import("components/card"),
   },
   computed: {
       ...mapState("cart", {
       value: state => state.value
+    }),
+    ...mapState("curProducts", {
+        cards: state => state.cards,
+        searcher: state => state.searcher,
+        matching: state => state.matching
     })
   },
   methods: {
+      ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
+      ...mapActions("cart", ["addProductCart","addProductFavor"]),
+      ...mapMutations("curProducts",["ADD_TO_SEARCHER","ADD_TO_MATCHING"]),
       updateHeader() {
           this.showSlider = true;
-          console.log("this.showSlider");
-      }
+      },
+      preventInput(searcher, cards) {
+          console.log(event.data);
+          this.ADD_TO_SEARCHER(event.data);
+          console.log(searcher);
+          const curProduct = this.cards.filter(item=>  item.title.toLowerCase().indexOf(this.searching.toLowerCase()) !== -1);
+          console.log(curProduct[0]);
+          this.ADD_TO_MATCHING(curProduct[0]);
+          this.showResult = true;
+      },
+      compareProducts(title) {
+           const curProduct = this.cards.filter(item=> item.title === title);
+           console.log(curProduct);
+            this.addProductCompare(curProduct[0]);
+            this.showResult = false;
+        },
+    buyProducts(title) {
+        const cartProduct = this.cards.filter(item=> item.title === title);
+        this.addProductCart(cartProduct[0]);
+        this.showResult = false;
+    },
+    favorProducts(title) {
+        const favorProduct = this.cards.filter(item=> item.title === title);
+        this.addProductFavor(favorProduct[0]);
+        this.showResult = false;
+    }
   }
 };
 </script>
-<style lang="postcss" scoped>
+<style lang="postcss" >
 .header__list__icons {
     display: flex;
     flex-direction: row;
@@ -268,6 +329,11 @@ margin-right: 1.8rem;
                     display: flex;
                     flex-direction: column;
                     width: 40%;
+                    &-count {
+                        & .info {
+                            color: #fff;
+                        }
+                    }
                 }
             }
             &__nav {
@@ -318,7 +384,7 @@ margin-right: 1.8rem;
         &::before {
             display: block;
             position: absolute;
-            top: .6rem;
+            top: .15rem;
             right: -.1rem;
             content:'';
             width: 1rem;
@@ -334,7 +400,7 @@ margin-right: 1.8rem;
         &::after {
             display: block;
             position: absolute;
-            top: -.05rem;
+            top: -.55rem;
             right: -.7rem;
             content:'';
             width: 2.3rem;
@@ -347,6 +413,23 @@ margin-right: 1.8rem;
         padding: .5rem 1rem;
         border-radius: 3rem;
         border: 1px solid rgba(48, 48, 48, .4);
+    }
+}
+.result-searching {
+    position: absolute;
+    z-index: 10000;
+    & .card {
+        border-radius: 1.5rem;
+        box-shadow: 0 5px 10px 10px;
+    }
+    & .card-detail {
+        display: none;
+    }
+}
+.active {
+    color: #1CAB6E;
+    &.header__list__item__icons-pic::before {
+        ackground: svg-load('searcher.svg', fill=#1CAB6E, width=100%, height=100%);
     }
 }
 </style>

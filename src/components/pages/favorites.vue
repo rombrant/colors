@@ -52,6 +52,12 @@ export default {
       align-items: center;
       flex:1;
   }
+  & .card-fav {
+    display: none;
+  }
+  & .card-buy {
+        font-size: 1rem;
+    }
   & .card__img {
       min-width: 50%;;
   }

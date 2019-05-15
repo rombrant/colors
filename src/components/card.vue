@@ -1,9 +1,9 @@
 <template lang="pug">
     .card
-        .card__info
-            span.card-status есть в наличии
-            span.card-code Код {{code}}
         .card__img
+            .card__info
+                span.card-status есть в наличии
+                span.card-code Код {{code}}
             img(:src="img") 
         .card__desc
             .card-title {{title}}
@@ -47,6 +47,7 @@ export default {
 .card__panel {
     display: flex;
     flex-direction: row;
+    padding-top: 2rem;
 }
 .item-slider-card {
     min-width: 100%;

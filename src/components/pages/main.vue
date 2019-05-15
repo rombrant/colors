@@ -40,7 +40,6 @@ export default {
    },
    compareProducts(title) {
            const curProduct = this.cards.filter(item=> item.title === title);
-           console.log(curProduct);
             this.addProductCompare(curProduct[0]);
         },
     buyProducts(title) {
