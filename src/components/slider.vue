@@ -1,6 +1,6 @@
 <template lang="pug">
     .container
-        flickity.list-slider-cards(ref="flickity" :options="flickityOptions" )
+        flickity.list-slider-cards(ref="flickity" :options="flickityOptions" v-if="cards.length > 0")
             li.card-item(v-for="card in cards" :key="card.id").carousel-cell.item-slider-card
                 card-root(
                     :title="card.title"
