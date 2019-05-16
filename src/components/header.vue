@@ -425,10 +425,14 @@ margin-right: 1.8rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
     width: 50vw;
-    left: -170%;
+    left: -190%;
+    background-color: rgba(125, 116, 243, 0.6);
+    border-radius: 3rem; 
+    transition: .7s;
     &__item {
-        width: 30%;
+        width: 33%;
     }
     & .card {
         border-radius: 1.5rem;
