@@ -1,5 +1,5 @@
 <template lang="pug">
-    .h1 MAIN
+    .mainsection MAIN
         ul.list-products
             li.card-item(v-for="card in cards" :key="card.id")
                 card-root(

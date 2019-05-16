@@ -1,3 +1,3 @@
 <template lang="pug">
-    .h1 Products
+    h1 Products
 </template>

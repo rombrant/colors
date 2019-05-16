@@ -50,19 +50,23 @@
 </template>
 <style lang="postcss">
 .portfolio {
-    
+    max-width: 920px;
+    margin: 0 auto;
     & .comp-headline {
         padding-top: 1rem;
         text-align: start;
         border-bottom: 1px solid #000;
         width: 25%;
+        color: #000;
     }
     & .comp-desc {
         padding-bottom: 3rem;
+        color: #000;
     }
     &-list {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         flex-wrap: wrap;
         text-align: center;
         

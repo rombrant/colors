@@ -1,7 +1,6 @@
 <template lang="pug">
-    .container
         flickity.list-slider-cards(ref="flickity" :options="flickityOptions" v-if="cards.length > 0")
-            li.card-item(v-for="card in cards" :key="card.id").carousel-cell.item-slider-card
+            li(v-for="card in cards" :key="card.id").carousel-cell.item-slider-card
                 card-root(
                     :title="card.title"
                     :img="card.pic"
@@ -25,7 +24,7 @@ export default {
         
     return {
       flickityOptions: {
-      autoPlay: 2000,
+      autoPlay: 3000,
       initialIndex: 3,
         pageDots: false,
         prevNextButtons: false,
@@ -54,7 +53,7 @@ export default {
 </script>
 <style lang="postcss">
 .flickity-viewport {
-        height: 16rem;
+        height: 17rem;
     }
 .item-slider-card {
     min-width: 100%;
@@ -106,6 +105,9 @@ export default {
     }
     & .card-buy, & .card-fav, & .card-compare {
         display: none;
+    }
+    & .card-title {
+        color: #fff;
     }
     &  .card-text {
         font-size: .8rem;

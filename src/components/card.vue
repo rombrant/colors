@@ -47,7 +47,7 @@ export default {
 .card__panel {
     display: flex;
     flex-direction: row;
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 .item-slider-card {
     min-width: 100%;
@@ -104,6 +104,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-bottom: .4rem;
     &-item {
     margin-right: .3rem;
     display: block;
@@ -148,6 +149,12 @@ export default {
                 background: svg-load('comparison.svg', fill=#1CAB6E, width=100%, height=100%);
         }
     }
+}
+.card-title {
+    padding-bottom: .4em;
+}
+.card-price {
+    padding-bottom: .4rem;
 }
 .card-fav {
     &:before {

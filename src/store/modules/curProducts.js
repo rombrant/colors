@@ -4,7 +4,6 @@ export default {
       curProducts: [],
       cards: [],
       detailProduct: [],
-      searcher: [],
       matching: []
     },
     mutations: {
@@ -16,9 +15,6 @@ export default {
       },
       ADD_DETAILCARD: (state, newDeatailCard) => {
         state.detailProduct = newDeatailCard;
-      },
-      ADD_TO_SEARCHER: (state, newSymbol) => {
-        state.searcher.push(newSymbol);
       },
       ADD_TO_MATCHING: (state, newMatch) => {
         state.matching = newMatch;

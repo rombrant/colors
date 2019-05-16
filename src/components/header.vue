@@ -56,18 +56,19 @@
                                     placeholder="Что вы хотите найти?"
                                     v-bind="$attrs"
                                     @input="preventInput").searching-input
-                        .result-searching(v-if="showResult")
-                            card-root(
-                                :title= "matching.title",
-                                :price= "matching.price",
-                                :img= "matching.pic",
-                                :code= "matching.code",
-                                :desc= "matching.desc",
-                                @compare="compareProducts",
-                                @favor="favorProducts",
-                                @buy="buyProducts"
-                            )
-            .container.slider(v-if="showSlider" @click="showSlider=false")
+                        ul.result-searching(v-if="matching.length>0 && showResult")
+                            li.result-searching__item(v-for="match in matching" :key="match.id")
+                                card-root(
+                                    :title= "match.title",
+                                    :price= "match.price",
+                                    :img= "match.pic",
+                                    :code= "match.code",
+                                    :desc= "match.desc",
+                                    @compare="compareProducts",
+                                    @favor="favorProducts",
+                                    @buy="buyProducts"
+                                )
+            .container.slider(v-if="showSlider" @click="showSlider=false" )
                 slider-app
 </template>
 <script>
@@ -112,25 +113,28 @@ export default {
     }),
     ...mapState("curProducts", {
         cards: state => state.cards,
-        searcher: state => state.searcher,
         matching: state => state.matching
     })
   },
   methods: {
       ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
       ...mapActions("cart", ["addProductCart","addProductFavor"]),
-      ...mapMutations("curProducts",["ADD_TO_SEARCHER","ADD_TO_MATCHING"]),
+      ...mapMutations("curProducts",["ADD_TO_MATCHING"]),
       updateHeader() {
           this.showSlider = true;
       },
       preventInput(searcher, cards) {
-          console.log(event.data);
-          this.ADD_TO_SEARCHER(event.data);
-          console.log(searcher);
-          const curProduct = this.cards.filter(item=>  item.title.toLowerCase().indexOf(this.searching.toLowerCase()) !== -1);
-          console.log(curProduct[0]);
-          this.ADD_TO_MATCHING(curProduct[0]);
-          this.showResult = true;
+          if (this.searching.length>0) {
+            const curProduct = this.cards.filter(item=>  item.title.toLowerCase().indexOf(this.searching.toLowerCase()) !== -1);
+            console.log(this.searching);
+            console.log(curProduct);
+            console.log(event.data);
+            this.ADD_TO_MATCHING(curProduct);
+            this.showResult = true;
+          }
+          else {
+              this.showResult = false;
+          }
       },
       compareProducts(title) {
            const curProduct = this.cards.filter(item=> item.title === title);
@@ -169,7 +173,7 @@ margin-right: 1.8rem;
 }
 .tabs__link {
     &:hover {
-        color: #5CD444;
+        color: #7D74F3;
     }
 }
 .header {
@@ -237,7 +241,7 @@ margin-right: 1.8rem;
                         background: #fff;
                     }
                     &.header__list__item-tel:before {
-                        background: svg-load('phone-call.svg', fill=#1CAB6E, width=100%, height=100%);
+                        background: svg-load('phone-call.svg', fill=#7D74F3, width=100%, height=100%);
                         transform: rotate(35deg);
                         transition: .6s;
                         z-index: 10000;
@@ -277,7 +281,7 @@ margin-right: 1.8rem;
                         }
                         &:hover {
                             &.header__list__item__icons-pic::before {
-                                 background: svg-load('heart.svg', fill=#1CAB6E, width=100%, height=100%);
+                                 background: svg-load('heart.svg', fill=#7D74F3, width=100%, height=100%);
                             }
                         } 
                     }
@@ -299,7 +303,7 @@ margin-right: 1.8rem;
                         } 
                         &:hover {
                             &.header__list__item__icons-pic::before {
-                                 background: svg-load('comparison.svg', fill=#1CAB6E, width=100%, height=100%);
+                                 background: svg-load('comparison.svg', fill=#7D74F3, width=100%, height=100%);
                             }
                         }
                     }
@@ -320,7 +324,7 @@ margin-right: 1.8rem;
                         }
                         &:hover {
                             &.header__list__item__icons-pic::before {
-                                 background: svg-load('shopping-cart.svg', fill=#1CAB6E, width=100%, height=100%);
+                                 background: svg-load('shopping-cart.svg', fill=#7D74F3, width=100%, height=100%);
                             }
                         }  
                     }
@@ -417,7 +421,15 @@ margin-right: 1.8rem;
 }
 .result-searching {
     position: absolute;
-    z-index: 10000;
+    z-index: 100000;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 50vw;
+    left: -170%;
+    &__item {
+        width: 30%;
+    }
     & .card {
         border-radius: 1.5rem;
         box-shadow: 0 5px 10px 10px;
@@ -427,8 +439,8 @@ margin-right: 1.8rem;
     }
 }
 .active {
-    color: #1CAB6E;
-    &.header__list__item__icons-pic::before {
+    color: #7D74F3;
+    & .header__list__item__icons-pic::before {
         ackground: svg-load('searcher.svg', fill=#1CAB6E, width=100%, height=100%);
     }
 }
