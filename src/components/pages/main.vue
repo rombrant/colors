@@ -18,10 +18,11 @@ export default {
     props: {
       card: Object
   },
-    data() {
-    return {
-        cards: []
-    }
+computed: {
+    ...mapState("curProducts", {
+        cards: state => state.cards,
+        matching: state => state.matching
+    })
 },
   components: {
     cardRoot : () => import("components/card"),
@@ -30,14 +31,6 @@ export default {
   methods: {
       ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
       ...mapActions("cart", ["addProductCart","addProductFavor"]),
-      makeArrWithRequiredImages(data) {
-      return data.map(card => {
-        const requiredPic = `http://kraskisnab.ru.com/${card.imgsrc}`;
-        card.pic = requiredPic;
-        this.addNewCard(card);
-        return card;
-      });
-   },
    compareProducts(title) {
            const curProduct = this.cards.filter(item=> item.title === title);
             this.addProductCompare(curProduct[0]);
@@ -50,11 +43,7 @@ export default {
         const favorProduct = this.cards.filter(item=> item.title === title);
         this.addProductFavor(favorProduct[0]);
     }
-  },
-created() {
-    const data = require("../../data/data.json");
-    this.cards = this.makeArrWithRequiredImages(data);
-    }
+  }
 }
 </script>
 <style lang="postcss">

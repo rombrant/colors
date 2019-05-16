@@ -18,12 +18,29 @@ div.root-wrapper-container
 
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   components: {
     appHeader : () => import("./components/header"),
     appFooter : () => import("./components/footer")
-  }
-};
+  },
+  methods: {
+      ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
+      ...mapActions("cart", ["addProductCart","addProductFavor"]),
+      makeArrWithRequiredImages(data) {
+      return data.map(card => {
+        const requiredPic = `http://kraskisnab.ru.com/${card.imgsrc}`;
+        card.pic = requiredPic;
+        this.addNewCard(card);
+        return card;
+      });
+   }
+  },
+created() {
+    const data = require("./data/data.json");
+    this.cards = this.makeArrWithRequiredImages(data);
+    }
+}
 </script>
 <style lang="postcss">
 
