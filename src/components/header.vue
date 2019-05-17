@@ -420,6 +420,9 @@ margin-right: 1.8rem;
     }
 }
 .result-searching {
+   overflow-x: hidden;
+   overflow-y: scroll;
+    max-height: 31rem;
     position: absolute;
     z-index: 100000;
     display: flex;

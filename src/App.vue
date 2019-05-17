@@ -27,7 +27,7 @@ export default {
   methods: {
       ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
       ...mapActions("cart", ["addProductCart","addProductFavor"]),
-      makeArrWithRequiredImages(data) {
+      makeArrWithRequiredImages(data, brends) {
       return data.map(card => {
         const requiredPic = `http://kraskisnab.ru.com/${card.imgsrc}`;
         card.pic = requiredPic;
@@ -37,8 +37,9 @@ export default {
    }
   },
 created() {
+    const brends = require("./data/brend.json")
     const data = require("./data/data.json");
-    this.cards = this.makeArrWithRequiredImages(data);
+    this.cards = this.makeArrWithRequiredImages(data,brends);
     }
 }
 </script>
