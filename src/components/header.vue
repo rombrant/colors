@@ -50,6 +50,13 @@
                                 :to="tab.href"
                                 exact-active-class="active"
                             ).tabs__link {{tab.title}}
+                        li( @click="showList=!showList").header__list__item__nav__item
+                            .tabs__link.categories-list-links Продукция
+                                categories-root(
+                                    v-if="showList"
+                                    @category="admitCategory"
+                                    :link="link"
+                                    )
                 .searching
                     label.searching-label
                         input-app(  v-model="searching",
@@ -87,12 +94,13 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
   data() {
     return {
+        link:'/products',
         searching:'',
         showResult:false,
         showSlider: true,
+        showList: false,
       tabs: [
         { title: "Главная", href: "/"},
-        { title: "Продукция", href: "/products" },
         { title: "О компании", href: "/about" },
         { title: "Доставка и оплата", href: "/transport" },
         { title: "Портфолио", href: "/portfolio" },
@@ -106,6 +114,7 @@ export default {
       countRoot : () => import("components/counter"),
       sliderApp : () => import("components/slider"),
       cardRoot : () => import("components/card"),
+      categoriesRoot: () => import("components/categories")
   },
   computed: {
       ...mapState("cart", {
@@ -119,16 +128,20 @@ export default {
   methods: {
       ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
       ...mapActions("cart", ["addProductCart","addProductFavor"]),
-      ...mapMutations("curProducts",["ADD_TO_MATCHING"]),
+      ...mapMutations("curProducts",["ADD_TO_MATCHING","ADD_NEW_BREND_CATEGORY"]),
       updateHeader() {
           this.showSlider = true;
+      },
+      admitCategory(brend,crads) {
+          const curCat = this.cards.filter(item => item.brend === brend);
+          console.log(curCat);
+          this.ADD_NEW_BREND_CATEGORY(curCat);
+          this.showSlider=false;
+          this.link="/products"
       },
       preventInput(searcher, cards) {
           if (this.searching.length>0) {
             const curProduct = this.cards.filter(item=>  item.title.toLowerCase().indexOf(this.searching.toLowerCase()) !== -1);
-            console.log(this.searching);
-            console.log(curProduct);
-            console.log(event.data);
             this.ADD_TO_MATCHING(curProduct);
             this.showResult = true;
           }
@@ -156,6 +169,19 @@ export default {
 };
 </script>
 <style lang="postcss" >
+.categories-list-links {
+    position: relative;
+    & .counter {
+        display: none;
+    }
+    & .categories {
+        position: absolute;
+        top: 2rem;
+        left: 0;
+        background: #fff;
+        z-index: 10000;
+    }
+}
 .header__list__icons {
     display: flex;
     flex-direction: row;
@@ -346,6 +372,7 @@ margin-right: 1.8rem;
                     flex-direction: row;
                 }
                 &__item {
+                    cursor: pointer;
                     padding-right: 1rem;
                     border-right: 1px solid rgba(48, 48, 48, .4);
                     margin-right: 1rem;

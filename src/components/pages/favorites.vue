@@ -9,10 +9,12 @@
                     :img="product.pic"
                     :code="product.code"
                     :desc="product.text"
+                    @compare="compareProducts",
+                    @buy="buyProducts"
                 )
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
     props: {
       product: Object
@@ -21,11 +23,36 @@ export default {
         ...mapState("cart", {
       favorProducts: state => state.favorProducts
     }),
+    ...mapState("curProducts", {
+      cards: state => state.cards
+    })
    },
      components: {
     cardRoot : () => import("components/card"),
     favorRoot : () => import("components/pages/favorites"),
-  }
+  },
+  methods: {
+        ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
+        ...mapActions("cart", ["addProductCart","addProductFavor"]),
+        ...mapMutations("curProducts",["ADD_TO_MATCHING", "ADD_NEW_BREND_CATEGORY"]),
+        admitCategory(brend, cards) {
+            const curCat = this.cards.filter(item => item.brend === brend);
+          console.log(curCat);
+          this.ADD_NEW_BREND_CATEGORY(curCat);
+          this.showSlider=false;
+        },
+         compareProducts(title) {
+           const curProduct = this.cards.filter(item=> item.title === title);
+           console.log(curProduct);
+            this.addProductCompare(curProduct[0]);
+            this.showResult = false;
+        },
+    buyProducts(title) {
+        const cartProduct = this.cards.filter(item=> item.title === title);
+        this.addProductCart(cartProduct[0]);
+        this.showResult = false;
+    }
+    }
 }
 </script>
 <style lang="postcss">

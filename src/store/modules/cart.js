@@ -24,7 +24,7 @@ export default {
     actions: {
           addProductCart({ commit }, newProductCart) {
               commit("ADD_CARTPRODUCT", newProductCart);
-              const value = parseFloat(newProductCart.price);
+              const value = parseInt(newProductCart.price.replace(".",""));
               commit("INCREASE_VALUE", value);
           },
           addProductFavor({ commit }, newFavorProduct) {

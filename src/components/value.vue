@@ -1,6 +1,6 @@
 <template lang="pug">
     .info
-        span.value Итого {{currentValue}}0 рублей
+        span.value Итого {{currentValue}} рублей
 </template>
 <script>
 import {  mapState, mapActions, mapMutations  } from "vuex"

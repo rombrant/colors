@@ -4,7 +4,9 @@ export default {
       curProducts: [],
       cards: [],
       detailProduct: [],
-      matching: []
+      matching: [],
+      brends: [],
+      category: []
     },
     mutations: {
       ADD_CARD: (state, card) => {
@@ -16,8 +18,14 @@ export default {
       ADD_DETAILCARD: (state, newDeatailCard) => {
         state.detailProduct = newDeatailCard;
       },
+      ADD_BREND( state , brends) {
+        state.brends = brends;
+    },
       ADD_TO_MATCHING: (state, newMatch) => {
         state.matching = newMatch;
+      },
+      ADD_NEW_BREND_CATEGORY: (state, newCategory) => {
+        state.category = newCategory;
       }
     },
     actions: {
@@ -29,6 +37,6 @@ export default {
         },
           addNewDetail({ commit }, newDetailCard) {
             commit("ADD_DETAILCARD", newDetailCard);
-        }
+        },
       }
   };

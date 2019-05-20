@@ -20,26 +20,34 @@ div.root-wrapper-container
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
 export default {
+  props: {
+    showSlider: true
+  },
   components: {
     appHeader : () => import("./components/header"),
-    appFooter : () => import("./components/footer")
+    appFooter : () => import("./components/footer"),
   },
   methods: {
       ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
+      ...mapMutations("curProducts", ["ADD_BREND"]),
       ...mapActions("cart", ["addProductCart","addProductFavor"]),
-      makeArrWithRequiredImages(data, brends) {
+      makeArrWithRequiredImages(data) {
       return data.map(card => {
         const requiredPic = `http://kraskisnab.ru.com/${card.imgsrc}`;
         card.pic = requiredPic;
         this.addNewCard(card);
         return card;
       });
+   },
+   makeNewBrends(brends) {
+     this.ADD_BREND(brends);
    }
   },
 created() {
     const brends = require("./data/brend.json")
     const data = require("./data/data.json");
     this.cards = this.makeArrWithRequiredImages(data,brends);
+    this.brends = this.makeNewBrends(brends);
     }
 }
 </script>
