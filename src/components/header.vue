@@ -128,17 +128,25 @@ export default {
   methods: {
       ...mapActions("curProducts", ["addProductCompare","addNewCard"]),
       ...mapActions("cart", ["addProductCart","addProductFavor"]),
-      ...mapMutations("curProducts",["ADD_TO_MATCHING","ADD_NEW_BREND_CATEGORY"]),
+      ...mapMutations("curProducts",["ADD_TO_MATCHING","ADD_NEW_BREND_CATEGORY","ADD_NEW_ARR_CURLIST","ADD_NEW_ARR_PAGEDOTS"]),
       updateHeader() {
           this.showSlider = true;
       },
-      admitCategory(brend,crads) {
-          const curCat = this.cards.filter(item => item.brend === brend);
+      admitCategory(brend, cards, category) {
+            const curCat = this.cards.filter(item => item.brend === brend);
           console.log(curCat);
-          this.ADD_NEW_BREND_CATEGORY(curCat);
+            this.ADD_NEW_BREND_CATEGORY(curCat);
+          const pageDots = Math.ceil(curCat.length/10);
+            var arr = new Array(pageDots); 
+            for (var i =0; arr.length>i; i++) {
+                arr[i]=i+1;
+            }
+            this.ADD_NEW_ARR_PAGEDOTS(arr);
+            const curCatFirst = curCat.slice(0, 10);
+            this.ADD_NEW_ARR_CURLIST(curCatFirst);
           this.showSlider=false;
           this.link="/products"
-      },
+        },
       preventInput(searcher, cards) {
           if (this.searching.length>0) {
             const curProduct = this.cards.filter(item=>  item.title.toLowerCase().indexOf(this.searching.toLowerCase()) !== -1);
@@ -171,6 +179,26 @@ export default {
 <style lang="postcss" >
 .categories-list-links {
     position: relative;
+    &:hover {
+        &.categories-list-links:before {
+             border-left: 1px solid #7D74F3;
+            border-bottom: 1px solid #7D74F3;
+        }
+           
+            }
+     &::before {
+            position: absolute;
+            top: 4px;
+            right: -1rem;
+            content: '';
+            width: .5rem;
+            height: .5rem;
+            display: block;
+            border-left: 1px solid #000;
+            border-bottom: 1px solid #000;
+            transform: rotate(-45deg);
+            
+        }
     & .counter {
         display: none;
     }
@@ -415,7 +443,7 @@ margin-right: 1.8rem;
         &::before {
             display: block;
             position: absolute;
-            top: .15rem;
+            top: 10px;
             right: -.1rem;
             content:'';
             width: 1rem;
@@ -431,7 +459,7 @@ margin-right: 1.8rem;
         &::after {
             display: block;
             position: absolute;
-            top: -.55rem;
+            top: 0;
             right: -.7rem;
             content:'';
             width: 2.3rem;
@@ -444,6 +472,13 @@ margin-right: 1.8rem;
         padding: .5rem 1rem;
         border-radius: 3rem;
         border: 1px solid rgba(48, 48, 48, .4);
+        & .input__error-tooltip {
+            display: none;
+        }
+        & input {
+            border: none;
+            padding: 0;
+        }
     }
 }
 .result-searching {

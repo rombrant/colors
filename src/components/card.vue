@@ -221,7 +221,6 @@ export default {
     & .card__desc {
         display: flex;
         flex-direction: row;
-        width: 30%;
         justify-content: space-between;
     }
     & .card__img {

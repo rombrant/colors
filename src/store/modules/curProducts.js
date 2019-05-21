@@ -6,7 +6,9 @@ export default {
       detailProduct: [],
       matching: [],
       brends: [],
-      category: []
+      category: [],
+      pagedots: [],
+      curListCat: []
     },
     mutations: {
       ADD_CARD: (state, card) => {
@@ -26,6 +28,15 @@ export default {
       },
       ADD_NEW_BREND_CATEGORY: (state, newCategory) => {
         state.category = newCategory;
+      },
+      ADD_NEW_ARR_PAGEDOTS: (state, newArrPageDots) => {
+        state.pagedots = newArrPageDots;
+      },
+      ADD_NEW_ARR_CURLIST: (state, newArrCurList) => {
+        state.curListCat = newArrCurList;
+      },
+      ADD_NEW_ARR_PRODUCT: (state, newProduct) => {
+        state.newProduct.push(newProduct);
       }
     },
     actions: {
