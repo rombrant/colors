@@ -55,7 +55,7 @@ created() {
 
 .content-container {
 
-  max-width: 1490px;
+  max-width: 1360px;
   margin: 0 auto;
   min-height: 90vh;
 }
