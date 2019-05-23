@@ -4,7 +4,7 @@
             li.header__list__item
                 .header__list__item__contacts
                     a(href="+78009636160").header__list__item-tel 7(800) 963 61 00
-                    a(href="+78009636160").li.header__list__item-callback Перезвоните мне!
+                    a(href="+78009636160").header__list__item-callback Перезвоните мне!
                 ul.header__list__icons
                     li.header__list__item__icons-pic(@click="showSlider=false")
                             router-link(
@@ -309,6 +309,10 @@ margin-right: 1.8rem;
                 border-radius: 3rem;
                 border: 2px solid #fff;  
                 text-decoration-line: none;
+                &:hover {
+                    background: #fff;
+                    color: #7D74F3;
+                }
             }
             &__icons {
                 &-pic {
@@ -492,7 +496,7 @@ margin-right: 1.8rem;
     flex-wrap: wrap;
     justify-content: space-between;
     width: 50vw;
-    left: -190%;
+    left: -30rem;
     background-color: rgba(125, 116, 243, 0.6);
     border-radius: 3rem; 
     transition: .7s;

@@ -56,7 +56,7 @@ input {
   position: absolute;
   top: 100%;
   left: 30%;
-  transform: translateX(-50%);
+  transform: translateX(-20%);
   z-index: 100;
 }
 .input {
@@ -74,10 +74,7 @@ input {
     }
   }
   &_iconed {
-    .input__title {
-      margin-left: 45px;
-      margin-bottom: 13px;
-    }
+    
     .input__elem {
       padding-left: 45px;
       background: left center / auto 29px no-repeat;

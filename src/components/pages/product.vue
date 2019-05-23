@@ -61,12 +61,16 @@ export default {
     }
     & .card {
         flex-direction: row;
+        &:hover {
+            box-shadow: none;
+        }
     }
     & .card-buy {
         font-size: 1rem;
     }
     & .card__img {
         min-width: 45%;
+        
     }
 }
 </style>

@@ -41,7 +41,7 @@
     }
 }
 .footer-wrapper{
-    max-width: 920px;
+    max-width: 1360px;
     margin: 0 auto;
         &__links {
         display: flex;

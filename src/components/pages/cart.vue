@@ -10,11 +10,11 @@
                     :price="product.price"
                     :img="product.pic"
                 ).cart-item
-            .value 
+            .value(v-if="value.length>0") 
                 value-root(
                     :value="value"
                 )
-        form.login__form(@submit.prevent="sendOffer")
+        form.login__form#form(@submit.prevent="sendOffer" v-if="cartProducts.length>0")
           .login__form-title Оформить заказ
           .login__row
             input-app(
@@ -43,9 +43,11 @@
             button(
               type="submit"
               :disabled="disableSubmit"
-            ).login__send-data Отправить
+            ).send-form-button Отправить
 </template>
 <script>
+import $ from "jquery"
+import axios from "axios"
 import { Validator } from "simple-vue-validator";
 import { mapState } from 'vuex';
 export default {
@@ -68,10 +70,11 @@ export default {
     return {
       disableSubmit: false,
         user: {
-        name: "",
-        email: "",
-        phone: ""
+          name: "",
+          email: "",
+          phone: ""
         }
+                
     }
   },
    computed: {
@@ -88,14 +91,68 @@ export default {
     inputApp : () => import("components/input")
   },
   methods: {
-     async sendOffer() {
-      if ((await this.$validate()) === false) return;
+     async sendOffer(user, cartProducts, value) {
+      if ((await this.$validate()) === false ) return;
       this.disableSubmit = true;
+      var products = [];
+      var code = [];
+      var price = [];
+      for (var i=0 ; this.cartProducts.length>i; i++) {
+        products[i] = this.cartProducts[i].title;
+        code[i] = this.cartProducts[i].code;
+        price[i] = this.cartProducts[i].price;
+      }
+       var realPrice = 0;
+            Array.from(this.value).forEach(element => {
+                realPrice += element;
+            });
+      var fData = new FormData();
+
+      fData.append('name', this.user.name);
+      fData.append('phone', this.user.phone);
+      fData.append('email', this.user.email);
+      fData.append('totalprice', realPrice);
+      fData.append('products', products);
+      fData.append('code', code);
+      fData.append('price', price);
+      console.log(products, code, price,realPrice);
+      console.log(fData.getAll('products'));
+        $.ajax({
+      url: 'post.php',
+      type: 'POST',
+      contentType: false,
+      processData: false,
+      data: fData,
+      success: function(msg) {
+        console.log(msg);
+        if (msg == 'ok') {
+          alert('Заказ отправлен, Менеджер магазина свяжется с вами через несколько минут');
+          this.disableSubmit = false;
+          $('#form').trigger('reset'); // очистка формы
+        } else {
+          this.disableSubmit = false;
+          alert('Ошибка');
+        }
+      }
+    });
+      
      }
   }
 }
 </script>
 <style lang="postcss" >
+.send-form-button {
+  margin-top: 1rem;
+    border-radius: 3rem;
+    border: 2px solid#7D74F3;
+    background: #7D74F3;
+    margin-right: 0;
+    color: #fff;
+    &[disabled] {
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
+}
 .cart__block {
   display: flex;
   flex-direction: row;
@@ -141,10 +198,21 @@ export default {
     font-size: 1rem;
   }
   
-  
+
 }
 .login__form {
   flex: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  & .login__form-title {
+  margin-bottom: 1rem;
+  flex:1;
+  }
+  & .login__row {
+    flex: 1;
+    width: 100%;
+  }  
 }
 
 </style>

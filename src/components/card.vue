@@ -48,6 +48,7 @@ export default {
     display: flex;
     flex-direction: row;
     padding-top: 1rem;
+    flex-wrap: wrap;
 }
 .item-slider-card {
     min-width: 100%;
@@ -64,6 +65,10 @@ export default {
     flex-direction: column;
     background: #fff;
     justify-content: space-between;
+    border-radius: .7rem; 
+    &:hover {
+        box-shadow: 0 0  5px 5px;
+    }
     &-code {
         font-size: 1rem;
     }
@@ -81,7 +86,7 @@ export default {
     font-size: 1.2rem;
     &:before {
         position: absolute;
-        top: 30%;
+        top: 10px;
         left: 0;
         display: block;
         content:'';

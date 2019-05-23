@@ -4,7 +4,7 @@
             @category="admitCategory"
             :link="link"
                             )
-        ul.list-products
+        ul.list-products.list-brends
             -
                 var firms = [
                     {
@@ -17,11 +17,11 @@
                     },
                     {
                         path:'bison',
-                        text:'bison - сфера производства лакокрасочной продукции с 1885 года'
+                        text:'Bison - сфера производства лакокрасочной продукции с 1885 года. Бизон означает качество и инновации. Bison работает с системой обеспечения качества, чтобы гарантировать постоянное качество.'
                     },
                     {
                         path:'tikkurila',
-                        text:'Flügger - датская группа,  которая производит краски, обои и малярные инструменты '
+                        text:'Tikkurila - Благодаря подъему экономики и активному строительству железных дорог в 1867 году на рынке Финляндии впервые была представлена продукция под маркой Tikkurila. '
                     },
                 ]
             for firm in firms
@@ -108,7 +108,6 @@ computed: {
     },
     admitCategory(brend, cards, category) {
             const curCat = this.cards.filter(item => item.brend === brend);
-          console.log(curCat);
             this.ADD_NEW_BREND_CATEGORY(curCat);
           const pageDots = Math.ceil(curCat.length/10);
             var arr = new Array(pageDots); 
@@ -127,11 +126,8 @@ computed: {
             const min = 1;
             const max = 170;
             var random = Math.floor(Math.random() * (max - min)) + min;
-            console.log(random);
-            console.log(this.cards[random])
             arr[i]= (this.cards[random]);
         }
-        console.log(arr);
         return arr;    
 
     },
@@ -141,11 +137,8 @@ computed: {
             const min = 1;
             const max = 170;
             var random = Math.floor(Math.random() * (max - min)) + min;
-            console.log(random);
-            console.log(this.cards[random])
             arr[i]= (this.cards[random]);
         }
-        console.log(arr);
         return arr;    
 
     }
@@ -162,6 +155,15 @@ computed: {
     background-size: cover;
     &__img {
         transform: translateY(10%);
+    }
+}
+.list-brends {
+    & .card-item {
+        display: flex;
+        flex-direction: column;
+        & img {
+            height: 50%;;
+        }
     }
 }
 .mainsection {

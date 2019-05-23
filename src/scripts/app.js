@@ -4,6 +4,7 @@ import router from '../router'
 import store from '../store'
 import SimpleVueValidation from 'simple-vue-validator';
 
+
 Vue.use(SimpleVueValidation);
 
 

@@ -68,6 +68,9 @@ export default {
         flex-direction: row;
         height: 100%;
         background: transparent;
+        &:hover {
+            box-shadow: none;
+        }
     }
     & .card__desc {
         justify-content: center;
