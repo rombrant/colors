@@ -129,6 +129,7 @@ export default {
      async sendOffer(user, cartProducts, value) {
       if ((await this.$validate()) === false ) return;
       this.disableSubmit = true;
+      var fData = new FormData(); 
       fData.append('name', this.user.name);
       fData.append('phone', this.user.phone);
       fData.append('email', this.user.email);
