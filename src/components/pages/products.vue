@@ -105,6 +105,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 6rem;
 }
 .item-products {
     max-width: 25%;
@@ -131,6 +132,7 @@ export default {
     left: 1.5rem;
     min-width: 9rem;
     min-height: 1.5rem;
+    font-size: .8rem;
     }
     & .categories {
         background: #fff;
@@ -144,14 +146,14 @@ export default {
         }
         &::before {
             position: absolute;
-            top: .5rem;
-            right: 1rem;
+            top: .6rem;
+            right: .5rem;
             content: '';
             width: .5rem;
             height: .5rem;
             display: block;
-            border-left: 2px solid #000;
-            border-bottom: 2px solid #000;
+            border-left: 1px solid #000;
+            border-bottom: 1px solid #000;
             transform: rotate(-45deg);
         }
     }

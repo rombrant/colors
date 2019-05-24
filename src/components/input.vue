@@ -5,6 +5,7 @@
           )
       .input__title(v-if="title") {{title}} 
       input(
+          :placeholder="placeholder"
           v-bind="$attrs"
           :value="value" 
           @input="$emit('input', $event.target.value)"
@@ -19,6 +20,7 @@
 export default {
     inheritAttrs: false,
   props: {
+    placeholder: String,
     title: String,
     errorText: {
       type: String,
@@ -112,11 +114,23 @@ input {
 }
 .input__elem {
   width: 100%;
-  padding: 10px 8%;
+  padding: 5px 1rem;
   border: none;
   border-bottom: 1px solid #1f232d;
   &::placeholder {
     color: rgba(55, 62, 66, 0.25);
+  }
+}
+.contacts {
+  & .input__elem {
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 8px 10px;
+  }
+  & .input__title {
+    font-weight: 700;
+    color: #1f232d;
+    opacity: .9;
   }
 }
 </style>

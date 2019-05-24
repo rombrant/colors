@@ -10,14 +10,11 @@
                     :price="product.price"
                     :img="product.pic"
                 ).cart-item
-            .value(v-if="value.length>0") 
-                value-root(
-                    :value="value"
-                )
         form.login__form#form(@submit.prevent="sendOffer" v-if="cartProducts.length>0")
-          .login__form-title Оформить заказ
+          .login__form-text Оформить заказ
           .login__row
             input-app(
+              placeholder="Введите имя"
               title="Имя"
               icon="user"
               v-model="user.name"
@@ -25,6 +22,7 @@
             )
           .login__row
             input-app(
+              placeholder="example@mail.ru"
               title="Электронная почта"
               icon="key"
               type="mail"
@@ -33,9 +31,10 @@
             )
           .login__row
             input-app(
+               placeholder="+7 (_ _ _) _ _ _ - _ _ - _ _ "
               title="Телефон"
               icon="key"
-              type="mail"
+              type="text"
               v-model="user.phone"
               :errorText="validation.firstError('user.phone')"
             )
@@ -44,6 +43,10 @@
               type="submit"
               :disabled="disableSubmit"
             ).send-form-button Отправить
+      .value(v-if="value.length>0") 
+                  value-root(
+                      :value="value"
+                  )
 </template>
 <script>
 import $ from "jquery"
@@ -141,6 +144,13 @@ export default {
 }
 </script>
 <style lang="postcss" >
+.value {
+  padding-top: 3rem;
+  & .info{
+    color: rgb(243, 116, 116);
+  }
+  
+}
 .send-form-button {
   margin-top: 1rem;
     border-radius: 3rem;
@@ -161,6 +171,8 @@ export default {
     display: flex;
     flex-direction: column;
     flex: 1;
+    max-height: 25rem;
+    overflow-y: scroll
 }
 .comp-headline {
   text-align: center;
@@ -177,7 +189,14 @@ export default {
     width: 100%;
     & .card__desc {
     align-items: center;
-    width: 60%;
+    width: 70%;
+  }
+  & .card__img {
+    width: 20%;
+  }
+  & .card-title {
+    font-size: .8rem;
+    font-weight: 700;
   }
 }
 
@@ -186,9 +205,7 @@ export default {
   flex-direction: row;
   align-items: center;
   width: 100%;
-  & .card__desc {
-    width: 100%;
-  }
+  min-height: 25%;
   & .card-title, & .card-raiting, & .card-price {
   flex:1;
   }
@@ -205,9 +222,11 @@ export default {
   align-items: center;
   display: flex;
   flex-direction: column;
-  & .login__form-title {
+  max-height: 25rem;
+  & .login__form-text {
   margin-bottom: 1rem;
   flex:1;
+  font-size: 1.5rem;
   }
   & .login__row {
     flex: 1;

@@ -23,6 +23,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    & span {
+        margin-right: 1rem;
+    }
 }
 .btn-primary {
     background: #7D74F3;

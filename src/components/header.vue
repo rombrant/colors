@@ -177,6 +177,9 @@ export default {
 };
 </script>
 <style lang="postcss" >
+.header__list__item__nav {
+    padding-left: 50px;
+}
 .categories-list-links {
     position: relative;
     &:hover {
@@ -235,11 +238,11 @@ margin-right: 1.8rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
         &__icons {
-            padding-right: 3rem; 
             flex: 1;
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
+            
         }
         &__item {
             display: flex;
@@ -249,8 +252,9 @@ margin-right: 1.8rem;
                 align-items: center;
                 padding-bottom: 1rem;
             }
+            
             &:nth-child(2) {
-                padding: 1rem;
+                padding: 10px;
                 border-radius: 3rem;
                 background-color: #fff;
                 align-items: center;
@@ -390,7 +394,8 @@ margin-right: 1.8rem;
                 &__desc {
                     display: flex;
                     flex-direction: column;
-                    width: 40%;
+                    max-width: 30%;
+                    text-align: end;
                     &-count {
                         & .info {
                             color: #fff;
@@ -441,6 +446,7 @@ margin-right: 1.8rem;
     border-radius: 50%;
 }
 .searching {
+    padding-right: 20px;
     &-label {
         display: block;
         position: relative;
@@ -473,7 +479,7 @@ margin-right: 1.8rem;
         }
     }
     &-input {
-        padding: .5rem 1rem;
+        padding: .5rem 1rem ;
         border-radius: 3rem;
         border: 1px solid rgba(48, 48, 48, .4);
         & .input__error-tooltip {

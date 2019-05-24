@@ -24,8 +24,8 @@ export default {
         
     return {
       flickityOptions: {
-      autoPlay: 3000,
-      initialIndex: 3,
+      autoPlay: 4000,
+      initialIndex: 48,
         pageDots: false,
         prevNextButtons: false,
         groupCells: true,
@@ -61,6 +61,9 @@ export default {
     & .card-item {
         min-width: 100%;
         max-width: 100%;
+    }
+    & .card__panel {
+        justify-content: center;
     }
     & .card {
         margin: 0;

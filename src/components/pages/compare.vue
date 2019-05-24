@@ -68,6 +68,11 @@ export default {
 }
 </script>
 <style lang="postcss">
+.list-products {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .comp-headline {
   text-align: center;
   font-weight: 700;
@@ -82,7 +87,7 @@ export default {
   flex-direction: column;
   
   align-items: center;
-  max-width: 45%;
+  max-width: 50%;
   & .card {
     min-height: 98%;
     justify-content: flex-start;

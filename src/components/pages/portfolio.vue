@@ -50,7 +50,7 @@
 </template>
 <style lang="postcss">
 .portfolio {
-    max-width: 920px;
+    max-width: 1024px;
     margin: 0 auto;
     & .comp-headline {
         padding-top: 1rem;
@@ -75,6 +75,9 @@
         min-width: 30%;
         &-headline {
             padding: 1rem 0;
+            & h4 {
+                font-weight: 700;
+            }
         }
     }
 }

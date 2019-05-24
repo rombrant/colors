@@ -56,6 +56,14 @@ export default {
 </script>
 <style lang="postcss">
 .product-card-item {
+    & .card-code {
+        font-size: 1rem;
+        letter-spacing: 0;
+    }
+    & .card-status {
+        font-size: 1rem;
+        letter-spacing: 0;
+    }
     & .card-detail {
         display: none;
     }

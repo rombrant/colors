@@ -4,13 +4,14 @@
             li.footer-wrapper__item
                 .logo
                     img(src="../images/content/logo-comp.png", alt="alt")
-                span Доставка
-                span В пределах МКАД
-                span автотранспортом нашей компании
-                span Оплата
+                span.list-items Доставка
+                span.list-items-links В пределах МКАД
+                span.list-items-links автотранспортом нашей компании
+                span.list-items Оплата
                 .logo
                     img(src="../images/content/visa.png", alt="alt")
                     img(src="../images/content/mastercard.png", alt="alt")
+                    span.list-items-links mastercard
             li.footer-wrapper__item
                 ul.list-items Каталог
                     - var items = ["PPG", "Flugger","Beckers","Murexin","ACE","Bison","Paritet","Stolz"]
@@ -41,7 +42,7 @@
     }
 }
 .footer-wrapper{
-    max-width: 1360px;
+    max-width: 1024px;
     margin: 0 auto;
         &__links {
         display: flex;
@@ -61,6 +62,18 @@
     &-copyright {
         color: #fff;
         padding: 1rem 0;
+        text-align: center;
     }
+    & .list-items {
+        font-weight: 700;
+        &-links {
+            font-weight: 300;
+        }
+    }
+}
+.logo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 </style>

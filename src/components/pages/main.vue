@@ -44,7 +44,7 @@
                         @favor="favorProducts",
                         @buy="buyProducts"
                 )
-        .new__offers
+        .popular__offers
             h3.headline Популярные товары    
             ul.list-products 
                 li.item-products(v-for="card in cardsPopular" :key="card.id")
@@ -146,6 +146,9 @@ computed: {
 }
 </script>
 <style lang="postcss">
+.popular__offers {
+    padding-bottom: 3rem;
+}
 .block__offer {
     min-width: 100%;
     min-height: 400px;
@@ -161,13 +164,14 @@ computed: {
     & .card-item {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
         & img {
-            height: 50%;;
+            height: 40%;;
         }
     }
 }
 .mainsection {
-    padding: 2% 0;
+    padding: 0;
     font-size: 3rem;
     & .counter {
         display: none;
@@ -232,6 +236,7 @@ computed: {
         display: none;
     }
 }
+
 </style>
 
 

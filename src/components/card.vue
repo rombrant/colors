@@ -45,6 +45,7 @@ export default {
 </script>
 <style lang="postcss">
 .card__panel {
+    min-width: 100%;
     display: flex;
     flex-direction: row;
     padding-top: 1rem;
@@ -58,16 +59,23 @@ export default {
         max-width: 100%;
     }
 }
+
+.card__desc {
+    justify-content: space-between;
+}
 .card {
-    margin: 1rem 1rem;
+    margin: 1rem .5rem;
     padding: .5rem .5rem;
     display: flex;
     flex-direction: column;
     background: #fff;
     justify-content: space-between;
     border-radius: .7rem; 
+    transition: .6s;
+    height: 97%;
     &:hover {
-        box-shadow: 0 0  5px 5px;
+        transition: .6s;
+        box-shadow: 0 0  10px 1px;
     }
     &-code {
         font-size: 1rem;
@@ -84,9 +92,11 @@ export default {
     position: relative;
     padding-left: 1rem; 
     font-size: 1.2rem;
+    font-size: 12px;
+    letter-spacing: -1px;
     &:before {
         position: absolute;
-        top: 10px;
+        top: 5px;
         left: 0;
         display: block;
         content:'';
@@ -96,9 +106,14 @@ export default {
         border-radius: 50%;
     }
 }
+.card-code {
+    font-size: 12px;
+    letter-spacing: -1px;
+}
 .card-text {
-    font-size: 1rem;
+    font-size: .8rem;
     color: #000;
+    font-weight: 500;
 }
 .card__desc {
     align-items: center;
@@ -125,22 +140,22 @@ export default {
 .card-button {
     position: relative;
     display: block;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     border: 2px solid rgb(122, 122, 122);
     border-radius: 50%;
     background: #fff;
-    margin-right: 1rem;
 }
 .card-compare {
+    margin-right: .5rem;
     &:before {
         display: block;
         content: '';
         top: .4rem;
         left: .4rem;
         position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1rem;
+        height: 1rem;
         cursor: pointer;
         background: svg-load('comparison.svg', fill=rgb(122, 122, 122), width=100%, height=100%);
         background-position: center center;
@@ -157,19 +172,21 @@ export default {
 }
 .card-title {
     padding-bottom: .4em;
+    font-weight: 700;
 }
 .card-price {
     padding-bottom: .4rem;
 }
 .card-fav {
+    margin-right: 1rem;
     &:before {
         display: block;
         content: '';
         top: .4rem;
         left: .4rem;
         position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1rem;
+        height: 1rem;
         cursor: pointer;
         background: svg-load('heart.svg', fill=rgb(122, 122, 122), width=100%, height=100%);
         background-position: center center;
@@ -185,8 +202,8 @@ export default {
     }
 }
 .card-buy {
-    padding-left: 2.5rem;
-    width: 8rem;
+    padding-left: 1.5rem;
+    width: 6rem;
     border-radius: 3rem;
     border: 2px solid#7D74F3;
     color: #7D74F3;
@@ -197,8 +214,8 @@ export default {
         top: .4rem;
         left: .4rem;
         position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1rem;
+        height: 1rem;
         cursor: pointer;
         background: svg-load('shopping-cart.svg', fill=rgb(125, 116, 243), width=100%, height=100%);
         background-position: center center;
