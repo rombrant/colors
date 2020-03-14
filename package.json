@@ -48,7 +48,7 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "acorn": "^6.1.1",
+    "acorn": "^5.7.4",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "email-templates": "^5.0.5",
